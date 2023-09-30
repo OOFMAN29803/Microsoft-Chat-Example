@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+body {
+background-color: #EFEFEF;
+}
+
+#parentcontainer {
+width: 350px;
+background-color: #1B76FF;
+border-radius: 10px;
+word-wrap: break-word;
+max-width: 400px;
+padding: 5px;
+margin-top: 20px;
+margin-left: 610px;
+}
+
+#message {
+margin-bottom: 25px;
+font-size: 15px;
+font-family: Sans-Serif;
+color: white;
+font-weight: bold;
+margin-left: 10px;
+}
+
+#timestamp {
+font-style: Italic;
+font-family: Sans-Serif;
+font-size: 10px;
+color: white;
+margin-left: 300px;
+}
+
+#botcontainer {
+width: 350px;
+background-color: #F3F3F3;
+border-radius: 10px;
+word-wrap: break-word;
+max-width: 400px;
+padding: 5px;
+margin-top: 20px;
+margin-left: 20px;
+}
+
+#botmessage {
+margin-bottom: 25px;
+font-size: 15px;
+font-family: Sans-Serif;
+color: black;
+font-weight: bold;
+margin-left: 10px;
+}
+
+#bottimestamp {
+font-style: Italic;
+font-family: Sans-Serif;
+font-size: 10px;
+color: black;
+margin-left: 300px;
+}
+.inputask {
+width: 700px;
+height: 40px;
+border-radius: 20px;
+position: fixed;
+bottom: 5%;
+left: 25%;
+background-color: #ECECEC;
+border: none;
+padding: 5px;
+
+}
+
+.blue {
+width: 400px;
+height: 400px;
+background-color: #2E73FF;
+border-radius: 450px;
+filter: blur(35px); 
+position: fixed;
+top: 10%;
+left: 7%;
+z-index: -1
+}
+
+.purple {
+width: 200px;
+height: 400px;
+background-color: #ED2DF4;
+border-radius: 450px;
+filter: blur(45px); 
+position: fixed;
+top: 36%;
+left: 79%;
+transform: rotate(45deg);
+z-index: -1;
+}
+
+.send {
+height: 40px;
+width: 70px;
+border: 0px;
+position: fixed;
+bottom: 5.8%;
+left: 73%;
+border-radius: 25px;
+font-weight: bold;
+font-family: Sans-Serif;
+
+}
+
+.parenty {
+width: 1000px;
+height: 730px;
+border: none;
+z-index: 1;
+margin-left: 270px;
+background-color: white;
+margin-top: 100px;
+border-radius: 10px;
+overflow: auto;
+}
+
+.topdiv {
+background-color: #007EFF;
+width: 100%;
+height: 90px;
+position: fixed;
+top: 0;
+left: 0;
+}
+
+::-webkit-scrollbar {
+  width: 5px; 
+}
+
+
+::-webkit-scrollbar-thumb {
+background-color: #888; 
+border-radius: 6px;
+}
+
+.typing {
+font-size: 15px;
+font-family: Sans-Serif;
+color: #007EFF;
+position: fixed;
+bottom: 12%;
+left: 21%;
+}
+
+.typediv {
+width: 70px;
+height: 30px;
+background-color: #F3F3F3;
+bottom: 12.6%;
+left: 20.4%;
+position: fixed;
+display: none;
+border-radius: 10px;
+}
+
+.psupport {
+font-family: Sans-Serif;
+color: white;
+font-size: 25px;
+margin-left: 20px;
+}
+
+.bye {
+position: fixed;
+background-color: orange;
+border: none;
+width: 150px;
+height: 40px;
+font-family: Sans-Serif;
+font-weight: bold;
+color: white;
+border-radius: 10px;
+transition: ease 0.5s;
+position: fixed;
+right: 3%;
+top: 3%;
+}
+
+.bye:hover  {
+background-color: #FF5A00;
+}
+.leaving {
+font-size: 15px;
+font-family: Sans-Serif;
+color: #007EFF;
+position: fixed;
+bottom: 12%;
+left: 70%;
+display: none;
+}
+
+</style>
+</head>
+<body>
+<div class="topdiv"><p class="psupport">Microsoft Support</p><button onclick="leave()"class="bye">Leave Support</button></div>
+<div class="parenty" id="parenty"><input class="inputask" id="inputask"></input>
+<button id="send" class="send" onclick="send()">Send</button>
+<div id="typediv" class="typediv"><p class="typing" id="typing">Typing...</p></div>
+<p id="leaving" class="leaving">Leaving the Chat...</p>
+</div>
+<div class="blue"></div>
+<div class="purple"></div>
+
+<script>
+
+function send() {
+const container = document.createElement("div")
+container.id = "parentcontainer"
+var input = document.getElementById("inputask").value
+const message = document.createElement("p")
+const timestamp = document.createElement("p")
+var parenty = document.getElementById("parenty")
+message.textContent = input
+message.id = "message"
+timestamp.id = "timestamp"
+input.textContent = ""
+timestamp.textContent = new Date().toLocaleTimeString();
+document.body.appendChild(container)
+container.appendChild(message)
+container.appendChild(timestamp)
+parenty.appendChild(container)
+typing();
+setTimeout(function() {
+botsend();
+notyping();
+}, Math.floor(Math.random() * 16000) + 1);
+}
+
+function botsend() {
+const botcontainer = document.createElement("div")
+botcontainer.id = "botcontainer"
+const botmessage = document.createElement("p")
+const bottimestamp = document.createElement("p")
+var botparenty = document.getElementById("parenty")
+botmessage.textContent = "Sorry I'm a bot just destined to test out the app, I can't actually know what you're saying"
+botmessage.id = "botmessage"
+bottimestamp.id = "bottimestamp"
+bottimestamp.textContent = new Date().toLocaleTimeString();
+document.body.appendChild(botcontainer)
+botcontainer.appendChild(botmessage)
+botcontainer.appendChild(bottimestamp)
+parenty.appendChild(botcontainer)
+
+}
+
+function disabled() {
+var buttony = document.getElementById("send")
+var input = document.getElementById("inputask").value
+if (input === "") {
+buttony.disabled = true
+buttony.style.backgroundColor = "#BABABA"
+buttony.style.color = "black"
+} else {
+buttony.disabled = false
+buttony.style.backgroundColor = "#0066FF";
+buttony.style.color = "white"
+}
+}
+
+function typing() {
+var typing = document.getElementById("typediv")
+typing.style.display = "block"
+}
+
+function notyping() {
+var typing = document.getElementById("typediv")
+typing.style.display = "none"
+}
+
+function leave() {
+var leaving = document.getElementById("leaving")
+leaving.style.display = "block"
+setTimeout(function() {
+window.location.href = "https://microsoft.com"
+}, Math.floor(Math.random() * 1600) + 1);
+}
+
+setInterval(disabled, 10)
+</script>
+</body>
+</html>
